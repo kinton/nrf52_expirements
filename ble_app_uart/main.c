@@ -277,6 +277,11 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         NRF_LOG_HEXDUMP_DEBUG(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
         
         NRF_LOG_HEXDUMP_INFO(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
+        
+        if (p_evt->params.rx_data.p_data[0] == 113) { // == q, 71 in hex
+            get_and_send_token();
+        }
+
         NRF_LOG_INFO("rx_data_len: %d", p_evt->params.rx_data.length);
 
         uint8_t data_array[p_evt->params.rx_data.length];
@@ -320,6 +325,9 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
 
         // static char const my_text[]    = "What a day, what a day!";
         static char my_text[10];
+        for (int i = 0; i < 11; i++) {
+          my_text[i] = 0x0;
+        }
         for (uint32_t i = 0; i < p_evt->params.rx_data.length; i++)
         {
             my_text[i] = p_evt->params.rx_data.p_data[i];
@@ -1187,6 +1195,7 @@ int main(void)
 
     NRF_LOG_INFO("Found %d valid records.", stat.valid_records);
     NRF_LOG_INFO("Found %d dirty records (ready to be garbage collected).", stat.dirty_records);
+
     if (false) {
     fds_record_desc_t desc = {0};
     fds_find_token_t  tok  = {0};
@@ -1245,7 +1254,8 @@ int main(void)
     }
     }
     
-    delete_all_begin();
+    // delete_all_begin();
+    // fds_gc();
 
     // Enter main loop.
     for (;;)
