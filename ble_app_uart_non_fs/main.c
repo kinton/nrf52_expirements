@@ -139,6 +139,9 @@ static void idle_state_handle(void)
 
 
 // fstorage zone
+#define maxlenoverble 244
+char message_handler[maxlenoverble];
+int mh_len = 0;
 // 0xED000 -> 0xF4000;
 void wait_for_flash_ready(nrf_fstorage_t const * p_fstorage)
 {
@@ -165,54 +168,10 @@ static void print_flash_info(nrf_fstorage_t * p_fstorage)
 #define FDS_SIZE 0x3000
 #define FST_START USER_DATA_START + 0x3000
 #define FST_END USER_DATA_START + USER_DATA_SIZE*/
-#define FST_START 0xed000
-#define FST_END 0xf4000
-
-static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
-{
-    if (p_evt->result != NRF_SUCCESS)
-    {
-        NRF_LOG_INFO("--> Event received: ERROR while executing an fstorage operation.");
-        return;
-    }
-
-    switch (p_evt->id)
-    {
-        case NRF_FSTORAGE_EVT_WRITE_RESULT:
-        {
-            NRF_LOG_INFO("--> Event received: wrote %d bytes at address 0x%x.",
-                         p_evt->len, p_evt->addr);
-            
-
-            ret_code_t err_code;
-            uint8_t    readed_data[256];
-            for (int i = 0; i < 256; i++) {
-              readed_data[i] = 0x0;
-            }
-            // Read data.
-            // uint32_t const len  = strtol(argv[2], NULL, 10);
-            uint16_t length = 12;
-            NRF_LOG_INFO("Before read: %s", readed_data);
-            err_code = nrf_fstorage_read(&fstorage, FST_START, readed_data, length);
-            APP_ERROR_CHECK(err_code);
-            NRF_LOG_INFO("Readed: \"%s\"", readed_data);
-
-            
-            // err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
-            // APP_ERROR_CHECK(err_code);
-              
-        } break;
-
-        case NRF_FSTORAGE_EVT_ERASE_RESULT:
-        {
-            NRF_LOG_INFO("--> Event received: erased %d page from address 0x%x.",
-                         p_evt->len, p_evt->addr);
-        } break;
-
-        default:
-            break;
-    }
-}
+#define FST_START 0xe0000
+#define FST_END 0xed000
+/*#define FST_START 0x3e000
+#define FST_END 0x3ffff*/
 
 /**@brief   Helper function to obtain the last address on the last page of the on-chip flash that
  *          can be used to write user data.
@@ -227,18 +186,6 @@ static uint32_t nrf5_flash_end_addr_get()
             bootloader_addr : (code_sz * page_sz));
 }
 
-NRF_FSTORAGE_DEF(nrf_fstorage_t fstorage) =
-{
-    /* Set a handler for fstorage events. */
-    .evt_handler = fstorage_evt_handler,
-
-    /* These below are the boundaries of the flash space assigned to this instance of fstorage.
-     * You must set these manually, even at runtime, before nrf_fstorage_init() is called.
-     * The function nrf5_flash_end_addr_get() can be used to retrieve the last address on the
-     * last page of flash available to write data. */
-    .start_addr = FST_START,
-    .end_addr   = FST_END,
-};
 
 
 
@@ -334,6 +281,13 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
 
         NRF_LOG_INFO("rx_data_len: %d", p_evt->params.rx_data.length);
         
+        memset(message_handler, 0, sizeof message_handler);
+        for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
+        {
+            message_handler[mh_len] = p_evt->params.rx_data.p_data[mh_len];
+            if (mh_len == 255) break;
+        }
+        
         /* uint16_t length = p_evt->params.rx_data.length;
         uint8_t data_array[p_evt->params.rx_data.length];
         // static char data_array_to_mem[256];
@@ -367,14 +321,19 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             while (app_uart_put('\n') == NRF_ERROR_BUSY);
         }
 
-        static char     m_hello_world[] = "hello world";
+        err_code = nrf_fstorage_erase(&fstorage, FST_START, 1, NULL);
+        APP_ERROR_CHECK(err_code);
+        // wait_for_flash_ready(&fstorage);
+
+        /*static char     m_hello_world[] = "hello world";
         NRF_LOG_INFO("Writing \"%s\" to flash.", m_hello_world);
         // ed000 -> f4000
         NRF_LOG_INFO("Size: %d", sizeof(m_hello_world));
-        // err_code = nrf_fstorage_erase(&fstorage, 0xED000, 12, NULL);
+        // err_code = nrf_fstorage_erase(&fstorage, FST_START, sizeof(m_hello_world), NULL);
+        // APP_ERROR_CHECK(err_code);
         err_code = nrf_fstorage_write(&fstorage, FST_START, m_hello_world, sizeof(m_hello_world), NULL);
         APP_ERROR_CHECK(err_code);
-        NRF_LOG_INFO("Writed");
+        NRF_LOG_INFO("Writed");*/
 
         // wait_for_flash_ready(&fstorage);
 
@@ -393,6 +352,28 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
 
 
 }
+
+
+static void data_echo(void) {
+            ret_code_t err_code;
+            uint8_t    readed_data[maxlenoverble];
+            for (int i = 0; i < maxlenoverble; i++) {
+              readed_data[i] = 0x0;
+            }
+            // Read data.
+            // uint32_t const len  = strtol(argv[2], NULL, 10);
+            uint16_t length = sizeof(readed_data);
+            err_code = nrf_fstorage_read(&fstorage, FST_START, readed_data, length);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_INFO("Readed: \"%s\"", readed_data);
+            
+            // length = sizeof(readed_data);
+
+            err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
+            APP_ERROR_CHECK(err_code);
+}
+
+
 /**@snippet [Handling the data received over BLE] */
 
 
@@ -850,6 +831,73 @@ static void advertising_start(void)
 }
 
 
+// fstorage
+static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
+{
+    if (p_evt->result != NRF_SUCCESS)
+    {
+        NRF_LOG_INFO("--> Event received: ERROR while executing an fstorage operation.");
+        return;
+    }
+
+    switch (p_evt->id)
+    {
+        case NRF_FSTORAGE_EVT_WRITE_RESULT:
+        {
+            NRF_LOG_INFO("--> Event received: wrote %d bytes at address 0x%x.",
+                         p_evt->len, p_evt->addr);
+            if (mh_len > 0)
+              data_echo();
+              
+        } break;
+
+        case NRF_FSTORAGE_EVT_ERASE_RESULT:
+        {
+            NRF_LOG_INFO("--> Event received: erased %d page from address 0x%x.",
+                         p_evt->len, p_evt->addr);
+            
+            if (mh_len > 0) {
+            NRF_LOG_INFO("Here");
+            ret_code_t err_code;
+            // static char     m_hello_world[] = "hello world";
+            static char m_hello_world[244];
+            
+            memset(m_hello_world, 0, sizeof m_hello_world);
+            for (uint32_t i = 0; i < sizeof message_handler; i++)
+            {
+                m_hello_world[i] = message_handler[i];
+                if (i == 255) break;
+            }
+
+            NRF_LOG_INFO("Writing \"%s\" to flash.", m_hello_world);
+            // ed000 -> f4000
+            NRF_LOG_INFO("Size: %d", sizeof(m_hello_world));
+            // err_code = nrf_fstorage_erase(&fstorage, FST_START, sizeof(m_hello_world), NULL);
+            // APP_ERROR_CHECK(err_code);
+            err_code = nrf_fstorage_write(&fstorage, FST_START, m_hello_world, sizeof(m_hello_world), NULL);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_INFO("Writed");
+            }
+        } break;
+
+        default:
+            break;
+    }
+}
+NRF_FSTORAGE_DEF(nrf_fstorage_t fstorage) =
+{
+    /* Set a handler for fstorage events. */
+    .evt_handler = fstorage_evt_handler,
+
+    /* These below are the boundaries of the flash space assigned to this instance of fstorage.
+     * You must set these manually, even at runtime, before nrf_fstorage_init() is called.
+     * The function nrf5_flash_end_addr_get() can be used to retrieve the last address on the
+     * last page of flash available to write data. */
+    .start_addr = FST_START,
+    .end_addr   = FST_END,
+};
+
+
 /**@brief Application main function.
  */
 int main(void)
@@ -888,6 +936,21 @@ int main(void)
      * be used to determine the last address on the last page of flash memory available to
      * store data. */
     NRF_LOG_INFO("%d", nrf5_flash_end_addr_get());
+
+            ret_code_t err_code;
+            uint8_t    readed_data[244];
+            for (int i = 0; i < maxlenoverble; i++) {
+              readed_data[i] = 0x0;
+            }
+            // Read data.
+            // uint32_t const len  = strtol(argv[2], NULL, 10);
+            uint16_t length = 12;
+            err_code = nrf_fstorage_read(&fstorage, FST_START, readed_data, length);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_INFO("Readed: \"%s\"", readed_data);
+
+        rc = nrf_fstorage_erase(&fstorage, FST_START, 1, NULL);
+        APP_ERROR_CHECK(rc);
     
         
         // ed000 -> f4000
