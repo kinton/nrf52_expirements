@@ -257,6 +257,61 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
     APP_ERROR_HANDLER(nrf_error);
 }
 
+static void get_and_send_token() {
+        uint32_t err_code;
+        fds_record_desc_t desc = {0};
+        fds_find_token_t  tok  = {0};
+        fds_flash_record_t  flash_record;
+        char     *p_data;
+        #define CONFIG_FILE     0x1111
+        #define CONFIG_REC_KEY  0x2222
+        bool flag = false;
+        while(fds_record_find(CONFIG_FILE, CONFIG_REC_KEY, &desc, &tok) == NRF_SUCCESS) {
+            NRF_LOG_INFO("success!!!!!!!!!");
+
+            err_code = fds_record_open(&desc, &flash_record);
+            if ( err_code != NRF_SUCCESS)
+            {
+                // return err_code;
+                NRF_LOG_INFO("Error (read)");
+            }
+
+            NRF_LOG_INFO("Found Record ID = %d\r\n",desc.record_id);
+            NRF_LOG_INFO("Data = ");
+            
+            // Access the record through the flash_record structure.
+            p_data = (char *) flash_record.p_data;
+            NRF_LOG_INFO(" %s \r\n", (uint32_t)p_data);
+        
+            
+            // Close the record when done.
+            err_code = fds_record_close(&desc);
+            if (err_code != NRF_SUCCESS)
+            {
+                // return err_code;
+                NRF_LOG_INFO("Error (read 2 )");
+            }
+
+            flag = true;
+        }
+
+        // uint16_t length = sizeof(p_data);
+        uint16_t length = sizeof(p_data) * 4;
+        /* uint8_t data_array[length];
+        for (uint32_t i = 0; i < length; i++)
+        {
+            data_array[i] = p_data[i];
+        }*/
+        // uint8_t data_array[15] = {'1', '2'};
+        // uint16_t length = 15;
+        if (flag) {
+          err_code = ble_nus_data_send(&m_nus, p_data, &length, m_conn_handle);
+          APP_ERROR_CHECK(err_code);
+        } else {
+          NRF_LOG_INFO("can't find any");
+        }
+}
+
 
 /**@brief Function for handling the data from the Nordic UART Service.
  *
@@ -324,8 +379,8 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         #define REC_KEY     0x2222
 
         // static char const my_text[]    = "What a day, what a day!";
-        static char my_text[10];
-        for (int i = 0; i < 11; i++) {
+        static char my_text[15];
+        for (int i = 0; i < 15; i++) {
           my_text[i] = 0x0;
         }
         for (uint32_t i = 0; i < p_evt->params.rx_data.length; i++)
@@ -989,61 +1044,6 @@ static void advertising_start(void)
 {
     uint32_t err_code = ble_advertising_start(&m_advertising, BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
-}
-
-static void get_and_send_token() {
-        uint32_t err_code;
-        fds_record_desc_t desc = {0};
-        fds_find_token_t  tok  = {0};
-        fds_flash_record_t  flash_record;
-        char     *p_data;
-        #define CONFIG_FILE     0x1111
-        #define CONFIG_REC_KEY  0x2222
-        bool flag = false;
-        while(fds_record_find(CONFIG_FILE, CONFIG_REC_KEY, &desc, &tok) == NRF_SUCCESS) {
-            NRF_LOG_INFO("success!!!!!!!!!");
-
-            err_code = fds_record_open(&desc, &flash_record);
-            if ( err_code != NRF_SUCCESS)
-            {
-                // return err_code;
-                NRF_LOG_INFO("Error (read)");
-            }
-
-            NRF_LOG_INFO("Found Record ID = %d\r\n",desc.record_id);
-            NRF_LOG_INFO("Data = ");
-            
-            // Access the record through the flash_record structure.
-            p_data = (char *) flash_record.p_data;
-            NRF_LOG_INFO(" %s \r\n", (uint32_t)p_data);
-        
-            
-            // Close the record when done.
-            err_code = fds_record_close(&desc);
-            if (err_code != NRF_SUCCESS)
-            {
-                // return err_code;
-                NRF_LOG_INFO("Error (read 2 )");
-            }
-
-            flag = true;
-        }
-
-        // uint16_t length = sizeof(p_data);
-        uint16_t length = sizeof(p_data) * 4;
-        /* uint8_t data_array[length];
-        for (uint32_t i = 0; i < length; i++)
-        {
-            data_array[i] = p_data[i];
-        }*/
-        // uint8_t data_array[15] = {'1', '2'};
-        // uint16_t length = 15;
-        if (flag) {
-          err_code = ble_nus_data_send(&m_nus, p_data, &length, m_conn_handle);
-          APP_ERROR_CHECK(err_code);
-        } else {
-          NRF_LOG_INFO("can't find any");
-        }
 }
 
 static void fds_evt_handler(fds_evt_t const * p_evt)
