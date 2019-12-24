@@ -1,0 +1,175 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks>
+  <BookmarkItem objectName="" line="834" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="91" extra="uint32_t err_code = ble_advertising_start(&amp;m_advertising, BLE_ADV_MODE_FAST);" color="5"/>
+  <BookmarkItem objectName="" line="252" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="1" extra="ret_code_t err_code = app_timer_init();" color="5"/>
+  <BookmarkItem objectName="" line="253" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="2" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="263" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="3" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="269" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="4" extra="err_code = sd_ble_gap_device_name_set(&amp;sec_mode," color="5"/>
+  <BookmarkItem objectName="" line="272" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="5" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="281" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="6" extra="err_code = sd_ble_gap_ppcp_set(&amp;gap_conn_params);" color="5"/>
+  <BookmarkItem objectName="" line="282" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="7" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="328" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="5" extra="data_array_to_mem[i] = 0x0;" color="5"/>
+  <BookmarkItem objectName="" line="344" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="8" extra="err_code = app_uart_put(p_evt->params.rx_data.p_data[i]);" color="5"/>
+  <BookmarkItem objectName="" line="345" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="9" extra="if ((err_code != NRF_SUCCESS) &amp;&amp; (err_code != NRF_ERROR_BUSY))" color="5"/>
+  <BookmarkItem objectName="" line="347" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="10" extra="NRF_LOG_ERROR(&quot;Failed receiving NUS message. Error 0x%x. &quot;, err_code);" color="5"/>
+  <BookmarkItem objectName="" line="348" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="11" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="350" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="12" extra="} while (err_code == NRF_ERROR_BUSY);" color="5"/>
+  <BookmarkItem objectName="" line="375" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="13" extra="err_code = ble_nus_data_send(&amp;m_nus, data, &amp;length, m_conn_handle);" color="5"/>
+  <BookmarkItem objectName="" line="376" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="14" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="389" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="15" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="396" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="16" extra="err_code = nrf_ble_qwr_init(&amp;m_qwr, &amp;qwr_init);" color="5"/>
+  <BookmarkItem objectName="" line="397" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="17" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="404" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="18" extra="err_code = ble_nus_init(&amp;m_nus, &amp;nus_init);" color="5"/>
+  <BookmarkItem objectName="" line="405" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="19" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="422" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="20" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="426" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="21" extra="err_code = sd_ble_gap_disconnect(m_conn_handle, BLE_HCI_CONN_INTERVAL_UNACCEPTABLE);" color="5"/>
+  <BookmarkItem objectName="" line="427" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="22" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="446" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="23" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="460" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="24" extra="err_code = ble_conn_params_init(&amp;cp_init);" color="5"/>
+  <BookmarkItem objectName="" line="461" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="25" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="471" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="26" extra="uint32_t err_code = bsp_indication_set(BSP_INDICATE_IDLE);" color="5"/>
+  <BookmarkItem objectName="" line="472" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="27" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="475" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="28" extra="err_code = bsp_btn_ble_sleep_mode_prepare();" color="5"/>
+  <BookmarkItem objectName="" line="476" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="29" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="479" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="30" extra="err_code = sd_power_system_off();" color="5"/>
+  <BookmarkItem objectName="" line="480" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="31" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="492" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="32" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="497" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="33" extra="err_code = bsp_indication_set(BSP_INDICATE_ADVERTISING);" color="5"/>
+  <BookmarkItem objectName="" line="498" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="34" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="516" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="35" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="522" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="36" extra="err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);" color="5"/>
+  <BookmarkItem objectName="" line="523" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="37" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="525" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="38" extra="err_code = nrf_ble_qwr_conn_handle_assign(&amp;m_qwr, m_conn_handle);" color="5"/>
+  <BookmarkItem objectName="" line="526" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="39" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="543" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="40" extra="err_code = sd_ble_gap_phy_update(p_ble_evt->evt.gap_evt.conn_handle, &amp;phys);" color="5"/>
+  <BookmarkItem objectName="" line="544" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="41" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="549" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="42" extra="err_code = sd_ble_gap_sec_params_reply(m_conn_handle, BLE_GAP_SEC_STATUS_PAIRING_NOT_SUPP, NULL, NULL);" color="5"/>
+  <BookmarkItem objectName="" line="550" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="43" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="555" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="44" extra="err_code = sd_ble_gatts_sys_attr_set(m_conn_handle, NULL, 0, 0);" color="5"/>
+  <BookmarkItem objectName="" line="556" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="45" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="561" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="46" extra="err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gattc_evt.conn_handle," color="5"/>
+  <BookmarkItem objectName="" line="563" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="47" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="568" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="48" extra="err_code = sd_ble_gap_disconnect(p_ble_evt->evt.gatts_evt.conn_handle," color="5"/>
+  <BookmarkItem objectName="" line="570" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="49" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="586" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="50" extra="ret_code_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="588" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="51" extra="err_code = nrf_sdh_enable_request();" color="5"/>
+  <BookmarkItem objectName="" line="589" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="52" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="594" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="53" extra="err_code = nrf_sdh_ble_default_cfg_set(APP_BLE_CONN_CFG_TAG, &amp;ram_start);" color="5"/>
+  <BookmarkItem objectName="" line="595" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="54" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="598" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="55" extra="err_code = nrf_sdh_ble_enable(&amp;ram_start);" color="5"/>
+  <BookmarkItem objectName="" line="599" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="56" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="623" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="57" extra="ret_code_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="625" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="58" extra="err_code = nrf_ble_gatt_init(&amp;m_gatt, gatt_evt_handler);" color="5"/>
+  <BookmarkItem objectName="" line="626" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="59" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="628" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="60" extra="err_code = nrf_ble_gatt_att_mtu_periph_set(&amp;m_gatt, NRF_SDH_BLE_GATT_MAX_MTU_SIZE);" color="5"/>
+  <BookmarkItem objectName="" line="629" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="61" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="639" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="62" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="647" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="63" extra="err_code = sd_ble_gap_disconnect(m_conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);" color="5"/>
+  <BookmarkItem objectName="" line="648" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="64" extra="if (err_code != NRF_ERROR_INVALID_STATE)" color="5"/>
+  <BookmarkItem objectName="" line="650" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="65" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="657" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="66" extra="err_code = ble_advertising_restart_without_whitelist(&amp;m_advertising);" color="5"/>
+  <BookmarkItem objectName="" line="658" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="67" extra="if (err_code != NRF_ERROR_INVALID_STATE)" color="5"/>
+  <BookmarkItem objectName="" line="660" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="68" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="675" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="6" extra="* 'new line' '\n' (hex 0x0A) or if the string has reached the maximum data length." color="5"/>
+  <BookmarkItem objectName="" line="682" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="69" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="702" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="70" extra="err_code = ble_nus_data_send(&amp;m_nus, data_array, &amp;length, m_conn_handle);" color="5"/>
+  <BookmarkItem objectName="" line="703" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="71" extra="if ((err_code != NRF_ERROR_INVALID_STATE) &amp;&amp;" color="5"/>
+  <BookmarkItem objectName="" line="704" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="72" extra="(err_code != NRF_ERROR_RESOURCES) &amp;&amp;" color="5"/>
+  <BookmarkItem objectName="" line="705" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="73" extra="(err_code != NRF_ERROR_NOT_FOUND))" color="5"/>
+  <BookmarkItem objectName="" line="707" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="74" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="709" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="75" extra="} while (err_code == NRF_ERROR_RESOURCES);" color="5"/>
+  <BookmarkItem objectName="" line="736" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="76" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="757" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="77" extra="err_code);" color="5"/>
+  <BookmarkItem objectName="" line="758" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="78" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="767" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="79" extra="uint32_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="784" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="80" extra="err_code = ble_advertising_init(&amp;m_advertising, &amp;init);" color="5"/>
+  <BookmarkItem objectName="" line="785" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="81" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="799" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="82" extra="uint32_t err_code = bsp_init(BSP_INIT_LEDS | BSP_INIT_BUTTONS, bsp_event_handler);" color="5"/>
+  <BookmarkItem objectName="" line="800" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="83" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="802" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="84" extra="err_code = bsp_btn_ble_init(NULL, &amp;startup_event);" color="5"/>
+  <BookmarkItem objectName="" line="803" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="85" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="813" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="86" extra="ret_code_t err_code = NRF_LOG_INIT(NULL);" color="5"/>
+  <BookmarkItem objectName="" line="814" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="87" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="824" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="88" extra="ret_code_t err_code;" color="5"/>
+  <BookmarkItem objectName="" line="825" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="89" extra="err_code = nrf_pwr_mgmt_init();" color="5"/>
+  <BookmarkItem objectName="" line="826" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="90" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+  <BookmarkItem objectName="" line="835" column="-1" path="C:/nRF5/examples/own_projects/ble_app_uart_non_fs/main.c" number="92" extra="APP_ERROR_CHECK(err_code);" color="5"/>
+ </Bookmarks>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="" line="343" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="344" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="345" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="346" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="347" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="348" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="349" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="350" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+ </Breakpoints>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
+ </FrameBufferWindow>
+ <Memory1>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ble_app_uart_pca10056_s140" radix="16" sizeText="" addressText=""/>
+ </Memory1>
+ <Memory2>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ble_app_uart_pca10056_s140" radix="16" sizeText="" addressText=""/>
+ </Memory2>
+ <Memory3>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ble_app_uart_pca10056_s140" radix="16" sizeText="" addressText=""/>
+ </Memory3>
+ <Memory4>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ble_app_uart_pca10056_s140" radix="16" sizeText="" addressText=""/>
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="ble_app_uart_pca10056_s140"/>
+  <ProjectSessionItem path="ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140"/>
+  <ProjectSessionItem path="ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;Application"/>
+  <ProjectSessionItem path="ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;nRF_BLE_Services"/>
+  <ProjectSessionItem path="ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;nRF_Libraries"/>
+  <ProjectSessionItem path="ble_app_uart_pca10056_s140;ble_app_uart_pca10056_s140;nRF_Log"/>
+ </Project>
+ <Register1>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ble_app_uart_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register1>
+ <Register2>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ble_app_uart_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register2>
+ <Register3>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ble_app_uart_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register3>
+ <Register4>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ble_app_uart_pca10056_s140" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register4>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never"/>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6639" useTextEdit="1" useBinaryEdit="0" left="0" path="../config/sdk_config.h" selected="0" top="6629" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="11" y="361" useTextEdit="1" useBinaryEdit="0" left="1" path="../../../main.c" selected="1" top="350" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="29" y="152" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/fstorage/nrf_fstorage.c" selected="0" top="144" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="79" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/fds/fds_internal_defs.h" selected="0" top="66" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="99" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error_weak.c" selected="0" top="84" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="130" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/ble/ble_services/ble_nus/ble_nus.h" selected="0" top="117" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="153" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/fstorage/nrf_fstorage_sd.c" selected="0" top="140" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="342" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" selected="0" top="331" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="60" y="297" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/fstorage/nrf_fstorage.h" selected="0" top="288" codecName="Default"/>
+ </Files>
+ <ARMCrossStudioWindow activeProject="ble_app_uart_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+</session>
