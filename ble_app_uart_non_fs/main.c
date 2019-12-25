@@ -137,11 +137,12 @@ static void idle_state_handle(void)
 }
 
 
+#define maxlenoverble 244
+#define tokenlen maxlenoverble
+char message_handler[tokenlen];
+int mh_len = 0;
 
 // fstorage zone
-#define maxlenoverble 244
-char message_handler[maxlenoverble];
-int mh_len = 0;
 // 0xED000 -> 0xF4000;
 void wait_for_flash_ready(nrf_fstorage_t const * p_fstorage)
 {
@@ -354,10 +355,10 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
 }
 
 
-static void data_echo(void) {
+static void read_and_send(void) {
             ret_code_t err_code;
-            uint8_t    readed_data[maxlenoverble];
-            for (int i = 0; i < maxlenoverble; i++) {
+            uint8_t    readed_data[tokenlen];
+            for (int i = 0; i < tokenlen; i++) {
               readed_data[i] = 0x0;
             }
             // Read data.
@@ -371,6 +372,22 @@ static void data_echo(void) {
 
             err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
             APP_ERROR_CHECK(err_code);
+}
+static void write_from_handler(void) {
+            ret_code_t err_code;
+            // static char     m_hello_world[] = "hello world";
+            static char m_hello_world[tokenlen];
+            
+            memset(m_hello_world, 0, sizeof m_hello_world);
+            for (uint32_t i = 0; i < mh_len; i++)
+            {
+                m_hello_world[i] = message_handler[i];
+                // if (i == 255) break;
+            }
+
+            err_code = nrf_fstorage_write(&fstorage, FST_START, m_hello_world, sizeof(m_hello_world), NULL);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_INFO("Writed");
 }
 
 
@@ -847,7 +864,7 @@ static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
             NRF_LOG_INFO("--> Event received: wrote %d bytes at address 0x%x.",
                          p_evt->len, p_evt->addr);
             if (mh_len > 0)
-              data_echo();
+              read_and_send();
               
         } break;
 
@@ -856,28 +873,9 @@ static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
             NRF_LOG_INFO("--> Event received: erased %d page from address 0x%x.",
                          p_evt->len, p_evt->addr);
             
-            if (mh_len > 0) {
-            NRF_LOG_INFO("Here");
-            ret_code_t err_code;
-            // static char     m_hello_world[] = "hello world";
-            static char m_hello_world[244];
-            
-            memset(m_hello_world, 0, sizeof m_hello_world);
-            for (uint32_t i = 0; i < sizeof message_handler; i++)
-            {
-                m_hello_world[i] = message_handler[i];
-                if (i == 255) break;
-            }
+            if (mh_len > 0)
+              write_from_handler();
 
-            NRF_LOG_INFO("Writing \"%s\" to flash.", m_hello_world);
-            // ed000 -> f4000
-            NRF_LOG_INFO("Size: %d", sizeof(m_hello_world));
-            // err_code = nrf_fstorage_erase(&fstorage, FST_START, sizeof(m_hello_world), NULL);
-            // APP_ERROR_CHECK(err_code);
-            err_code = nrf_fstorage_write(&fstorage, FST_START, m_hello_world, sizeof(m_hello_world), NULL);
-            APP_ERROR_CHECK(err_code);
-            NRF_LOG_INFO("Writed");
-            }
         } break;
 
         default:
@@ -936,10 +934,11 @@ int main(void)
      * be used to determine the last address on the last page of flash memory available to
      * store data. */
     NRF_LOG_INFO("%d", nrf5_flash_end_addr_get());
-
-            ret_code_t err_code;
-            uint8_t    readed_data[244];
-            for (int i = 0; i < maxlenoverble; i++) {
+            
+            // read example
+            /*ret_code_t err_code;
+            uint8_t    readed_data[tokenlen];
+            for (int i = 0; i < tokenlen; i++) {
               readed_data[i] = 0x0;
             }
             // Read data.
@@ -947,26 +946,22 @@ int main(void)
             uint16_t length = 12;
             err_code = nrf_fstorage_read(&fstorage, FST_START, readed_data, length);
             APP_ERROR_CHECK(err_code);
-            NRF_LOG_INFO("Readed: \"%s\"", readed_data);
-
-        rc = nrf_fstorage_erase(&fstorage, FST_START, 1, NULL);
-        APP_ERROR_CHECK(rc);
+            NRF_LOG_INFO("Readed: \"%s\"", readed_data);*/
+        
+        // erase example
+        /*rc = nrf_fstorage_erase(&fstorage, FST_START, 1, NULL);
+        APP_ERROR_CHECK(rc);*/
     
         
         // ed000 -> f4000
-        static char     m_hello_world[] = "hello world";
+        // write example
+        /*static char     m_hello_world[] = "hello world";
         // rc = nrf_fstorage_erase(&fstorage, FST_START, sizeof(m_hello_world), NULL);
         // APP_ERROR_CHECK(rc);
         NRF_LOG_INFO("Writing \"%s\" to flash. Start: %d", m_hello_world, FST_START);
         rc = nrf_fstorage_write(&fstorage, FST_START, m_hello_world, sizeof(m_hello_world), NULL);
-        APP_ERROR_CHECK(rc);
+        APP_ERROR_CHECK(rc);*/
 
-        // wait_for_flash_ready(&fstorage);
-        /* uint8_t    data[256] = {0};
-        uint32_t const len = 12;
-        rc = nrf_fstorage_read(&fstorage, 0xed000, data, len);
-        APP_ERROR_CHECK(rc);
-        NRF_LOG_INFO("Readed: \"%s\"", data);*/
 
     wait_for_flash_ready(&fstorage);
     NRF_LOG_INFO("Done.");
