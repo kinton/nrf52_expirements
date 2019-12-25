@@ -142,6 +142,18 @@ static void idle_state_handle(void)
 char message_handler[tokenlen];
 int mh_len = 0;
 
+/*#define USER_DATA_START 0xED000
+#define USER_DATA_SIZE 0x7000
+#define FDS_SIZE 0x3000
+#define FST_START USER_DATA_START + 0x3000
+#define FST_END USER_DATA_START + USER_DATA_SIZE*/
+#define FST_START 0xe0000
+#define FST_END 0xed000
+/*#define FST_START 0x3e000
+#define FST_END 0x3ffff*/
+
+#define tokenstart FST_START
+
 // fstorage zone
 // 0xED000 -> 0xF4000;
 void wait_for_flash_ready(nrf_fstorage_t const * p_fstorage)
@@ -163,16 +175,6 @@ static void print_flash_info(nrf_fstorage_t * p_fstorage)
     NRF_LOG_INFO("program unit: \t%d bytes",    p_fstorage->p_flash_info->program_unit);
     NRF_LOG_INFO("==============================");
 }
-
-/*#define USER_DATA_START 0xED000
-#define USER_DATA_SIZE 0x7000
-#define FDS_SIZE 0x3000
-#define FST_START USER_DATA_START + 0x3000
-#define FST_END USER_DATA_START + USER_DATA_SIZE*/
-#define FST_START 0xe0000
-#define FST_END 0xed000
-/*#define FST_START 0x3e000
-#define FST_END 0x3ffff*/
 
 /**@brief   Helper function to obtain the last address on the last page of the on-chip flash that
  *          can be used to write user data.
@@ -322,7 +324,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             while (app_uart_put('\n') == NRF_ERROR_BUSY);
         }
 
-        err_code = nrf_fstorage_erase(&fstorage, FST_START, 1, NULL);
+        err_code = nrf_fstorage_erase(&fstorage, tokenstart, 1, NULL);
         APP_ERROR_CHECK(err_code);
         // wait_for_flash_ready(&fstorage);
 
@@ -364,7 +366,7 @@ static void read_and_send(void) {
             // Read data.
             // uint32_t const len  = strtol(argv[2], NULL, 10);
             uint16_t length = sizeof(readed_data);
-            err_code = nrf_fstorage_read(&fstorage, FST_START, readed_data, length);
+            err_code = nrf_fstorage_read(&fstorage, tokenstart, readed_data, length);
             APP_ERROR_CHECK(err_code);
             NRF_LOG_INFO("Readed: \"%s\"", readed_data);
             
@@ -385,7 +387,7 @@ static void write_from_handler(void) {
                 // if (i == 255) break;
             }
 
-            err_code = nrf_fstorage_write(&fstorage, FST_START, m_hello_world, sizeof(m_hello_world), NULL);
+            err_code = nrf_fstorage_write(&fstorage, tokenstart, m_hello_world, sizeof(m_hello_world), NULL);
             APP_ERROR_CHECK(err_code);
             NRF_LOG_INFO("Writed");
 }
