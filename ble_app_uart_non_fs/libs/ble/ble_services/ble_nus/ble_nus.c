@@ -282,7 +282,7 @@ uint32_t ble_nus_init(ble_nus_t * p_nus, ble_nus_init_t const * p_nus_init)
     /**@snippet [Adding proprietary Service to the SoftDevice] */
     VERIFY_SUCCESS(err_code);
 
-    // Add the RX Characteristic.
+    // Add the RX Characteristic. (for commands)
     memset(&add_char_params, 0, sizeof(add_char_params));
     add_char_params.uuid                     = BLE_UUID_NUS_RX_CHARACTERISTIC;
     add_char_params.uuid_type                = p_nus->uuid_type;
@@ -296,6 +296,25 @@ uint32_t ble_nus_init(ble_nus_t * p_nus, ble_nus_init_t const * p_nus_init)
     add_char_params.write_access = SEC_OPEN;
 
     err_code = characteristic_add(p_nus->service_handle, &add_char_params, &p_nus->rx_handles);
+    if (err_code != NRF_SUCCESS)
+    {
+        return err_code;
+    }
+
+    // Add the RX Characteristic (for token inserting)
+    memset(&add_char_params, 0, sizeof(add_char_params));
+    add_char_params.uuid                     = 0x0004;
+    add_char_params.uuid_type                = p_nus->uuid_type;
+    add_char_params.max_len                  = BLE_NUS_MAX_RX_CHAR_LEN;
+    add_char_params.init_len                 = sizeof(uint8_t);
+    add_char_params.is_var_len               = true;
+    add_char_params.char_props.write         = 1;
+    add_char_params.char_props.write_wo_resp = 1;
+
+    add_char_params.read_access  = SEC_OPEN;
+    add_char_params.write_access = SEC_OPEN;
+
+    err_code = characteristic_add(p_nus->service_handle, &add_char_params, &p_nus->rx_token_handles);
     if (err_code != NRF_SUCCESS)
     {
         return err_code;

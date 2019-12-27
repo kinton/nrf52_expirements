@@ -142,6 +142,14 @@ static void idle_state_handle(void)
 char message_handler[tokenlen];
 int mh_len = 0;
 
+typedef enum {
+    empty,
+    token_write_and_check,
+    command_processing,
+} work_mode;
+
+work_mode current_work_mode = empty;
+
 /*#define USER_DATA_START 0xED000
 #define USER_DATA_SIZE 0x7000
 #define FDS_SIZE 0x3000
@@ -269,10 +277,10 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 static void nus_data_handler(ble_nus_evt_t * p_evt)
 {
 
-    NRF_LOG_INFO("Log: %s : %d", p_evt->type, p_evt->type);
-
     if (p_evt->type == BLE_NUS_EVT_RX_DATA)
     {
+        current_work_mode = command_processing;
+
         uint32_t err_code;
 
         NRF_LOG_DEBUG("Received data from BLE NUS. Writing data on UART.");
@@ -354,8 +362,21 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         APP_ERROR_CHECK(err_code);*/
         
     } else if (p_evt->type == BLE_NUS_EVT_RX_TOKEN_DATA) {
-        NRF_LOG_INFO("Token recieved!!!");
-        NRF_LOG_HEXDUMP_DEBUG(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
+        current_work_mode = token_write_and_check;
+
+        uint32_t err_code;
+
+        // write ble data to m_h, saving his len to mh_len
+        memset(message_handler, 0, sizeof message_handler);
+        for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
+        {
+            message_handler[mh_len] = p_evt->params.rx_data.p_data[mh_len];
+            if (mh_len == 255) break;
+        }
+
+        // clean token page, start echo in fstorage handler
+        err_code = nrf_fstorage_erase(&fstorage, tokenstart, 1, NULL);
+        APP_ERROR_CHECK(err_code);
     }
 }
 
@@ -395,91 +416,6 @@ static void write_from_handler(void) {
 }
 
 
-/**@snippet [Handling the data received over BLE] */
-uint32_t ble_nus_init_custom(ble_nus_t * p_nus, ble_nus_init_t const * p_nus_init)
-{
-    ret_code_t            err_code;
-    ble_uuid_t            ble_uuid;
-    ble_uuid128_t         nus_base_uuid = {{0x9E, 0xCA, 0xDC, 0x24, 0x0E, 0xE5, 0xA9, 0xE0, 0x93, 0xF3, 0xA3, 0xB5, 0x00, 0x00, 0x40, 0x6E}};
-    ble_add_char_params_t add_char_params;
-
-    VERIFY_PARAM_NOT_NULL(p_nus);
-    VERIFY_PARAM_NOT_NULL(p_nus_init);
-
-    // Initialize the service structure.
-    p_nus->data_handler = p_nus_init->data_handler;
-
-    /**@snippet [Adding proprietary Service to the SoftDevice] */
-    // Add a custom base UUID.
-    err_code = sd_ble_uuid_vs_add(&nus_base_uuid, &p_nus->uuid_type);
-    VERIFY_SUCCESS(err_code);
-
-    ble_uuid.type = p_nus->uuid_type;
-    ble_uuid.uuid = 0x0001;
-
-    // Add the service.
-    err_code = sd_ble_gatts_service_add(BLE_GATTS_SRVC_TYPE_PRIMARY,
-                                        &ble_uuid,
-                                        &p_nus->service_handle);
-    /**@snippet [Adding proprietary Service to the SoftDevice] */
-    VERIFY_SUCCESS(err_code);
-
-    // Add the RX Characteristic (for commands).
-    memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                     = 0x0002;
-    add_char_params.uuid_type                = p_nus->uuid_type;
-    add_char_params.max_len                  = maxlenoverble;
-    add_char_params.init_len                 = sizeof(uint8_t);
-    add_char_params.is_var_len               = true;
-    add_char_params.char_props.write         = 1;
-    add_char_params.char_props.write_wo_resp = 1;
-
-    add_char_params.read_access  = SEC_OPEN;
-    add_char_params.write_access = SEC_OPEN;
-
-    err_code = characteristic_add(p_nus->service_handle, &add_char_params, &p_nus->rx_handles);
-    if (err_code != NRF_SUCCESS)
-    {
-        return err_code;
-    }
-
-    // Add the RX Characteristic (for token inserting)
-    memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid                     = 0x0004;
-    add_char_params.uuid_type                = p_nus->uuid_type;
-    add_char_params.max_len                  = maxlenoverble;
-    add_char_params.init_len                 = sizeof(uint8_t);
-    add_char_params.is_var_len               = true;
-    add_char_params.char_props.write         = 1;
-    add_char_params.char_props.write_wo_resp = 1;
-
-    add_char_params.read_access  = SEC_OPEN;
-    add_char_params.write_access = SEC_OPEN;
-
-    err_code = characteristic_add(p_nus->service_handle, &add_char_params, &p_nus->rx_token_handles);
-    if (err_code != NRF_SUCCESS)
-    {
-        return err_code;
-    }
-
-    // Add the TX Characteristic.
-    /**@snippet [Adding proprietary characteristic to the SoftDevice] */
-    memset(&add_char_params, 0, sizeof(add_char_params));
-    add_char_params.uuid              = 0x0003;
-    add_char_params.uuid_type         = p_nus->uuid_type;
-    add_char_params.max_len           = maxlenoverble;
-    add_char_params.init_len          = sizeof(uint8_t);
-    add_char_params.is_var_len        = true;
-    add_char_params.char_props.notify = 1;
-
-    add_char_params.read_access       = SEC_OPEN;
-    add_char_params.write_access      = SEC_OPEN;
-    add_char_params.cccd_write_access = SEC_OPEN;
-
-    return characteristic_add(p_nus->service_handle, &add_char_params, &p_nus->tx_handles);
-    /**@snippet [Adding proprietary characteristic to the SoftDevice] */
-}
-
 /**@brief Function for initializing services that will be used by the application.
  */
 static void services_init(void)
@@ -499,7 +435,7 @@ static void services_init(void)
 
     nus_init.data_handler = nus_data_handler;
 
-    err_code = ble_nus_init_custom(&m_nus, &nus_init);
+    err_code = ble_nus_init(&m_nus, &nus_init);
     APP_ERROR_CHECK(err_code);
 
     
@@ -951,7 +887,7 @@ static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
         {
             NRF_LOG_INFO("--> Event received: wrote %d bytes at address 0x%x.",
                          p_evt->len, p_evt->addr);
-            if (mh_len > 0)
+            if (mh_len > 0 && current_work_mode == token_write_and_check)
               read_and_send();
               
         } break;
@@ -961,7 +897,7 @@ static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
             NRF_LOG_INFO("--> Event received: erased %d page from address 0x%x.",
                          p_evt->len, p_evt->addr);
             
-            if (mh_len > 0)
+            if (mh_len > 0 && current_work_mode == token_write_and_check)
               write_from_handler();
 
         } break;
