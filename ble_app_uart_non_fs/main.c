@@ -147,8 +147,19 @@ typedef enum {
     token_write_and_check,
     command_processing,
 } work_mode;
-
 work_mode current_work_mode = empty;
+
+typedef enum {
+    is_token_writed,
+    ask_for_token,
+} ble_command;
+#define ble_command_len 2;
+
+typedef enum {
+    ok,
+    bad,
+    empty_cmd
+} ble_command_answer;
 
 /*#define USER_DATA_START 0xED000
 #define USER_DATA_SIZE 0x7000
@@ -266,6 +277,69 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
     APP_ERROR_HANDLER(nrf_error);
 }
 
+
+
+static void read_and_send(uint32_t from) {
+            ret_code_t err_code;
+            uint8_t    readed_data[mh_len];
+            /*for (int i = 0; i < mh_len; i++) {
+              readed_data[i] = 0x0;
+            }*/
+            // Read data.
+            // uint32_t const len  = strtol(argv[2], NULL, 10);
+            uint16_t length = sizeof(readed_data);
+            err_code = nrf_fstorage_read(&fstorage, from, readed_data, length);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_INFO("Readed: \"%s\"", readed_data);
+            
+            // length = sizeof(readed_data);
+
+            err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
+            APP_ERROR_CHECK(err_code);
+}
+static void write_from_handler(void) {
+            ret_code_t err_code;
+            // static char     m_hello_world[] = "hello world";
+            static char msg_to_write[tokenlen];
+            
+            memset(msg_to_write, 0, sizeof msg_to_write);
+            for (uint32_t i = 0; i < mh_len; i++)
+            {
+                msg_to_write[i] = message_handler[i];
+                // if (i == 255) break;
+            }
+
+            err_code = nrf_fstorage_write(&fstorage, tokenstart, msg_to_write, sizeof(msg_to_write), NULL);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_INFO("Writed");
+}
+static bool get_token_write_status(void) {
+            ret_code_t err_code;
+            uint8_t readed_data[tokenlen] = {0};
+
+            err_code = nrf_fstorage_read(&fstorage, tokenstart, readed_data, tokenlen);
+            APP_ERROR_CHECK(err_code);
+            
+            bool is_token = false;
+            for (int i = 0; i < tokenlen; i++) {
+                if (readed_data[i] != 0xff) {
+                    is_token = true;
+                    break;
+                }
+            }
+
+            return is_token;
+}
+static void send_command_answer(ble_command_answer ca) {
+            ret_code_t err_code;
+            uint16_t length = 1;
+            uint8_t data_to_send[length];
+            memset(data_to_send, ca, sizeof(data_to_send));
+            err_code = ble_nus_data_send(&m_nus, data_to_send, &length, m_conn_handle);
+            APP_ERROR_CHECK(err_code);
+}
+
+
 /**@brief Function for handling the data from the Nordic UART Service.
  *
  * @details This function will process the data received from the Nordic UART BLE Service and send
@@ -293,13 +367,6 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         // }
 
         NRF_LOG_INFO("rx_data_len: %d", p_evt->params.rx_data.length);
-        
-        memset(message_handler, 0, sizeof message_handler);
-        for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
-        {
-            message_handler[mh_len] = p_evt->params.rx_data.p_data[mh_len];
-            if (mh_len == 255) break;
-        }
         
         /* uint16_t length = p_evt->params.rx_data.length;
         uint8_t data_array[p_evt->params.rx_data.length];
@@ -334,32 +401,29 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
             while (app_uart_put('\n') == NRF_ERROR_BUSY);
         }
 
-        err_code = nrf_fstorage_erase(&fstorage, tokenstart, 1, NULL);
-        APP_ERROR_CHECK(err_code);
-        // wait_for_flash_ready(&fstorage);
+        
+        ble_command_answer ca;
+        // if not empty
+        if (p_evt->params.rx_data.length < 1) {
+            ca = empty;
+            send_command_answer(ca);
 
-        /*static char     m_hello_world[] = "hello world";
-        NRF_LOG_INFO("Writing \"%s\" to flash.", m_hello_world);
-        // ed000 -> f4000
-        NRF_LOG_INFO("Size: %d", sizeof(m_hello_world));
-        // err_code = nrf_fstorage_erase(&fstorage, FST_START, sizeof(m_hello_world), NULL);
-        // APP_ERROR_CHECK(err_code);
-        err_code = nrf_fstorage_write(&fstorage, FST_START, m_hello_world, sizeof(m_hello_world), NULL);
-        APP_ERROR_CHECK(err_code);
-        NRF_LOG_INFO("Writed");*/
+            return;
+        }
 
-        // wait_for_flash_ready(&fstorage);
-
-        /*uint8_t    data[256] = {0};
-        // Read data.
-        // uint32_t const len  = strtol(argv[2], NULL, 10);
-        err_code = nrf_fstorage_read(&fstorage, 0xED000, data, sizeof(m_hello_world));
-        APP_ERROR_CHECK(err_code);
-        NRF_LOG_INFO("Readed: \"%s\"", data);
-
-        uint16_t length = 12;
-        err_code = ble_nus_data_send(&m_nus, data, &length, m_conn_handle);
-        APP_ERROR_CHECK(err_code);*/
+        // get cmd and processing
+        ble_command cmd = p_evt->params.rx_data.p_data[0];
+        
+        if (cmd == is_token_writed)
+        {
+            bool is_token = get_token_write_status();
+            ca = is_token ? ok : bad;
+            send_command_answer(ca);
+        }
+        else if (cmd == ask_for_token)
+        {
+            read_and_send(tokenstart);
+        }
         
     } else if (p_evt->type == BLE_NUS_EVT_RX_TOKEN_DATA) {
         current_work_mode = token_write_and_check;
@@ -371,48 +435,13 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
         {
             message_handler[mh_len] = p_evt->params.rx_data.p_data[mh_len];
-            if (mh_len == 255) break;
+            if (mh_len == maxlenoverble) break;
         }
 
         // clean token page, start echo in fstorage handler
         err_code = nrf_fstorage_erase(&fstorage, tokenstart, 1, NULL);
         APP_ERROR_CHECK(err_code);
     }
-}
-
-static void read_and_send(void) {
-            ret_code_t err_code;
-            uint8_t    readed_data[mh_len];
-            /*for (int i = 0; i < mh_len; i++) {
-              readed_data[i] = 0x0;
-            }*/
-            // Read data.
-            // uint32_t const len  = strtol(argv[2], NULL, 10);
-            uint16_t length = sizeof(readed_data);
-            err_code = nrf_fstorage_read(&fstorage, tokenstart, readed_data, length);
-            APP_ERROR_CHECK(err_code);
-            NRF_LOG_INFO("Readed: \"%s\"", readed_data);
-            
-            // length = sizeof(readed_data);
-
-            err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
-            APP_ERROR_CHECK(err_code);
-}
-static void write_from_handler(void) {
-            ret_code_t err_code;
-            // static char     m_hello_world[] = "hello world";
-            static char m_hello_world[tokenlen];
-            
-            memset(m_hello_world, 0, sizeof m_hello_world);
-            for (uint32_t i = 0; i < mh_len; i++)
-            {
-                m_hello_world[i] = message_handler[i];
-                // if (i == 255) break;
-            }
-
-            err_code = nrf_fstorage_write(&fstorage, tokenstart, m_hello_world, sizeof(m_hello_world), NULL);
-            APP_ERROR_CHECK(err_code);
-            NRF_LOG_INFO("Writed");
 }
 
 
@@ -888,7 +917,7 @@ static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
             NRF_LOG_INFO("--> Event received: wrote %d bytes at address 0x%x.",
                          p_evt->len, p_evt->addr);
             if (mh_len > 0 && current_work_mode == token_write_and_check)
-              read_and_send();
+              read_and_send(tokenstart);
               
         } break;
 
