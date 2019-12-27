@@ -8,16 +8,21 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body style="background: black;">
     
     <div class="main">
         <button id="connectButton">Соединиться</button>
         <button id="disconnectButton">Разъединиться</button>
-        <button id="ledOn">Включить светодиод</button>
-        <button id="ledOff">Выключить светодиод</button>
-        <div id="connected" style="display: none;">Connected</div>
+        <div id="connected" style="display: none;color:white;">Connected</div>
+        <br><br>
+        <!--<button id="ledOn">Включить светодиод</button>
+        <button id="ledOff">Выключить светодиод</button>-->
+        <button id="askIsToken">Токен установлен?</button>
+        <button id="getToken">Получить токен</button>
+        <button id="setToken">Установить токен</button>
+        <input id="tokenToSend" type="text">
     </div>
 
-    <script src="scirpt.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
