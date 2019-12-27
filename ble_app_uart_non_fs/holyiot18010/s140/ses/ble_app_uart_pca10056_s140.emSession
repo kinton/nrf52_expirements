@@ -2,17 +2,17 @@
 <session>
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
-  <BreakpointListItem trigger="" line="323" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="325" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="326" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="343" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="323" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="325" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="326" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="343" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="344" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="345" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="346" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="347" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="348" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="345" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="346" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="347" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="348" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="349" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="350" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="350" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="../../../../../../components/ble/ble_services/ble_nus/ble_nus.c" useHWbreakpoint="false"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
@@ -71,15 +71,15 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="83" y="459" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="0" top="445" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="99" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error_weak.c" selected="0" top="87" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="317" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="445" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="53" y="205" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../libs/ble/ble_services/ble_nus/ble_nus.h" selected="0" top="192" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="256" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../libs/ble/ble_services/ble_nus/ble_nus.c" selected="0" top="246" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="99" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/util/app_error_weak.c" selected="0" top="79" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6772" useTextEdit="1" useBinaryEdit="0" left="0" path="../config/sdk_config.h" selected="0" top="6757" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="152" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/fstorage/nrf_fstorage.c" selected="0" top="133" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="11" y="111" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/libraries/fstorage/nrf_fstorage.c" selected="0" top="98" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="302" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/ble/common/ble_srv_common.h" selected="0" top="289" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="500" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/softdevice/s140/headers/ble_gatts.h" selected="0" top="500" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="119" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../../components/ble/common/ble_srv_common.c" selected="0" top="106" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="30" y="71" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../libs/ble/ble_services/ble_nus/ble_nus.c" selected="0" top="61" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="52" y="188" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../libs/ble/ble_services/ble_nus/ble_nus.h" selected="1" top="169" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="ble_app_uart_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="ble_app_uart_pca10056_s140" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>
