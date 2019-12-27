@@ -112,6 +112,7 @@ extern "C" {
 typedef enum
 {
     BLE_NUS_EVT_RX_DATA,      /**< Data received. */
+    BLE_NUS_EVT_RX_TOKEN_DATA,
     BLE_NUS_EVT_TX_RDY,       /**< Service is ready to accept new data to be transmitted. */
     BLE_NUS_EVT_COMM_STARTED, /**< Notification has been enabled. */
     BLE_NUS_EVT_COMM_STOPPED, /**< Notification has been disabled. */

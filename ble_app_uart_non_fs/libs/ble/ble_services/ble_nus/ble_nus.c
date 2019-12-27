@@ -177,7 +177,7 @@ static void on_write(ble_nus_t * p_nus, ble_evt_t const * p_ble_evt)
     else if ((p_evt_write->handle == p_nus->rx_token_handles.value_handle) &&
              (p_nus->data_handler != NULL))
     {
-        evt.type                  = BLE_NUS_EVT_RX_DATA;
+        evt.type                  = BLE_NUS_EVT_RX_TOKEN_DATA;
         evt.params.rx_data.p_data = p_evt_write->data;
         evt.params.rx_data.length = p_evt_write->len;
 
