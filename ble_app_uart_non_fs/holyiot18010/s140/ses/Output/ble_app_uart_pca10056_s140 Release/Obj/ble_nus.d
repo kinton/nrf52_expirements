@@ -1,5 +1,5 @@
 Output/ble_app_uart_pca10056_s140\ Release/Obj/ble_nus.o: \
- C:\nRF5\components\ble\ble_services\ble_nus\ble_nus.c \
+ C:\nRF5\examples\own_projects\ble_app_uart_non_fs\libs\ble\ble_services\ble_nus\ble_nus.c \
  c:\nrf5\components\libraries\util\sdk_common.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.30c/include/stdint.h \
  C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.30c/include/stdbool.h \
@@ -40,7 +40,7 @@ Output/ble_app_uart_pca10056_s140\ Release/Obj/ble_nus.o: \
  c:\nrf5\components\softdevice\s140\headers\ble_gatt.h \
  c:\nrf5\components\softdevice\s140\headers\ble_gattc.h \
  c:\nrf5\components\softdevice\s140\headers\ble_gatts.h \
- C:\nRF5\components\ble\ble_services\ble_nus\ble_nus.h \
+ C:\nRF5\examples\own_projects\ble_app_uart_non_fs\libs\ble\ble_services\ble_nus\ble_nus.h \
  c:\nrf5\components\ble\common\ble_srv_common.h \
  c:\nrf5\components\softdevice\s140\headers\ble_types.h \
  c:\nrf5\components\libraries\util\app_util.h \

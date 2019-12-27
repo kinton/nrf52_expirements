@@ -71,7 +71,7 @@ Output/ble_app_uart_pca10056_s140\ Release/Obj/main.o: \
  c:\nrf5\components\libraries\experimental_section_vars\nrf_section.h \
  c:\nrf5\components\libraries\log\nrf_log_types.h \
  c:\nrf5\components\libraries\sortlist\nrf_sortlist.h \
- c:\nrf5\components\ble\ble_services\ble_nus\ble_nus.h \
+ ../../../libs/ble/ble_services/ble_nus/ble_nus.h \
  c:\nrf5\components\ble\ble_link_ctx_manager\ble_link_ctx_manager.h \
  c:\nrf5\components\ble\common\ble_conn_state.h \
  c:\nrf5\components\libraries\atomic\nrf_atomic.h \
