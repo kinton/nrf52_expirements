@@ -269,7 +269,7 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 static void nus_data_handler(ble_nus_evt_t * p_evt)
 {
 
-    NRF_LOG_INFO("CATCHA! %s", p_evt->type);
+    NRF_LOG_INFO("Log: %s : %d", p_evt->type, p_evt->type);
 
     if (p_evt->type == BLE_NUS_EVT_RX_DATA)
     {
@@ -353,12 +353,11 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         err_code = ble_nus_data_send(&m_nus, data, &length, m_conn_handle);
         APP_ERROR_CHECK(err_code);*/
         
+    } else if (p_evt->type == BLE_NUS_EVT_RX_TOKEN_DATA) {
+        NRF_LOG_INFO("Token recieved!!!");
+        NRF_LOG_HEXDUMP_DEBUG(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
     }
 }
-static void nus_data_handler_comm(ble_nus_evt_t * p_evt) {
-    NRF_LOG_HEXDUMP_DEBUG(p_evt->params.rx_data.p_data, p_evt->params.rx_data.length);
-}
-
 
 static void read_and_send(void) {
             ret_code_t err_code;
