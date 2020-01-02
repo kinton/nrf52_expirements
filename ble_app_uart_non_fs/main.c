@@ -281,6 +281,8 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 
 static void read_and_send(uint32_t from) {
             ret_code_t err_code;
+            if (mh_len == 0)
+                mh_len = maxlenoverble;
             uint8_t    readed_data[mh_len];
             /*for (int i = 0; i < mh_len; i++) {
               readed_data[i] = 0x0;
