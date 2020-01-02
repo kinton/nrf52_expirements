@@ -125,7 +125,16 @@ const disconnect = () => {
     console.log(answerTypes[currWorkMode]['name'] + ": " + answerTypes[currWorkMode]['values'][value])
   }
   let getTokenHandler = event => {
+    let encoder = new TextEncoder();
     let value = new TextDecoder().decode(event.target.value);
+    let valueCleaned = "";
+    for (let i = 0; i < value.length; i++) {
+      if (encoder.encode(value[i])[0] != 0)
+        valueCleaned += value[i];
+      else
+        break;
+    }
+    value = valueCleaned;
     console.log(value);
   }
   let checkTokenIntegrity = event => {
