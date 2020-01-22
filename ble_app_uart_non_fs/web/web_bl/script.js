@@ -3,6 +3,7 @@ const disconnectButton = document.getElementById('disconnectButton');const colou
 // const colourButton = document.getElementById('colourButton');
 const askIsToken = document.getElementById('askIsToken');
 const getToken = document.getElementById('getToken');
+const getDeviceId = document.getElementById('getDeviceId');
 const setToken = document.getElementById('setToken');
 const tokenToSend = document.getElementById('tokenToSend');
 const connect = document.getElementById('connect');
@@ -18,7 +19,8 @@ let currWorkMode;
 const workModes = {
     'isToken': 0,
     'getToken': 1,
-    'setToken': 2
+    'getDeviceId': 2,
+    'setToken': 3
 };
 const answerTypes = {
     0: {
@@ -93,6 +95,10 @@ const disconnect = () => {
     currWorkMode = workModes['getToken'];
     sendCommand.writeValue(new Uint8Array([1]));
   };
+  getDeviceId.onclick = async () => {
+    currWorkMode = workModes['getDeviceId'];
+    sendCommand.writeValue(new Uint8Array([2]));
+  }
   setToken.onclick = async () => {
     currWorkMode = workModes['setToken'];
     sendToken.writeValue(new TextEncoder().encode(tokenToSend.value));
@@ -107,6 +113,8 @@ const disconnect = () => {
             isTokenHandler(event);
           else if (currWorkMode == workModes['getToken'])
             getTokenHandler(event);
+          else if (currWorkMode == workModes['getDeviceId'])
+            getDeviceIdHandler(event);
           else if (currWorkMode == workModes['setToken'])
             checkTokenIntegrity(event);
           
@@ -136,6 +144,26 @@ const disconnect = () => {
     }
     value = valueCleaned;
     console.log(value);
+  }
+  function buf2hex(buffer) { // buffer is an ArrayBuffer
+    return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+  }
+  let getDeviceIdHandler = event => {
+    let value = event.target.value.getUint32();
+    console.log(value);
+    value = event.target.value.getBigUint64();
+    console.log(value);
+
+    /*value = new TextDecoder().decode(event.target.value);
+    let valueHex = [0];
+    let encoder = new TextEncoder();
+    for (let i = 0; i < value.length; i++) {
+      valueHex[i] = buf2hex(encoder.encode(value[i]).buffer);
+    }
+    console.log(value);
+    console.log(valueHex);*/
+    console.log(event.target.value.buffer);
+    console.log(buf2hex(event.target.value.buffer))
   }
   let checkTokenIntegrity = event => {
     let value = new TextDecoder().decode(event.target.value);
