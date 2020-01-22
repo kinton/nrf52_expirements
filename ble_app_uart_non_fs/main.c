@@ -152,6 +152,7 @@ work_mode current_work_mode = empty;
 typedef enum {
     is_token_writed,
     ask_for_token,
+    ask_for_device_id,
 } ble_command;
 #define ble_command_len 2;
 
@@ -340,6 +341,34 @@ static void send_command_answer(ble_command_answer ca) {
             err_code = ble_nus_data_send(&m_nus, data_to_send, &length, m_conn_handle);
             APP_ERROR_CHECK(err_code);
 }
+static void send_device_id() {
+            ret_code_t err_code;
+            const int device_id_len = 8;
+            uint8_t    device_id[device_id_len];
+            
+            int handler = NRF_FICR->DEVICEID[0];
+            for (int i = 0; i < device_id_len / 2; i++) {
+                device_id[device_id_len / 2 - 1 - i] = handler;
+                handler = handler / (16 * 16) - 1;
+            }
+            handler = NRF_FICR->DEVICEID[1];
+            for (int i = 0; i < device_id_len / 2; i++) {
+                device_id[device_id_len - 1 - i] = handler;
+                handler = handler / (16 * 16) - 1;
+            }
+            /*NRF_LOG_INFO("DEVICEID0: %08X\n", NRF_FICR->DEVICEID[0]);
+            NRF_LOG_INFO("DEVICEID1: %08X\n", NRF_FICR->DEVICEID[1]);
+            for (int i = 0; i < device_id_len; i++)
+              NRF_LOG_INFO("DEVICEID: %x", device_id[i]);
+            NRF_LOG_INFO("\nDEVICEID_TEXT: %s\n", device_id);*/
+            //device_id = NRF_FICR->DEVICEID[0] + NRF_FICR->DEVICEID[1];
+
+            uint16_t length = sizeof(device_id);
+            // uint16_t length = device_id_len;
+
+            err_code = ble_nus_data_send(&m_nus, device_id, &length, m_conn_handle);
+            APP_ERROR_CHECK(err_code);
+}
 
 
 /**@brief Function for handling the data from the Nordic UART Service.
@@ -425,6 +454,10 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         else if (cmd == ask_for_token)
         {
             read_and_send(tokenstart);
+        }
+        else if (cmd == ask_for_device_id)
+        {
+            send_device_id();
         }
         
     } else if (p_evt->type == BLE_NUS_EVT_RX_TOKEN_DATA) {
@@ -1020,6 +1053,9 @@ int main(void)
 
     wait_for_flash_ready(&fstorage);
     NRF_LOG_INFO("Done.");
+
+    //NRF_LOG_INFO("DEVICEID0: %08X\n", NRF_FICR->DEVICEID[0]);
+    //NRF_LOG_INFO("DEVICEID1: %08X\n", NRF_FICR->DEVICEID[1]);
  
     // Enter main loop.
     for (;;)
