@@ -72,6 +72,7 @@
 #include "nrf_delay.h" // delay
 #include "nrf_fstorage.h"
 #include "nrf_fstorage_sd.h"
+#include "sha256.h"
 
 #if defined (UART_PRESENT)
 #include "nrf_uart.h"
@@ -297,6 +298,24 @@ static void read_and_send(uint32_t from) {
             
             // length = sizeof(readed_data);
 
+            err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
+            APP_ERROR_CHECK(err_code);
+
+
+            // lets try sha256
+            sha256_context_t ctx;
+            err_code = sha256_init(&ctx);
+            APP_ERROR_CHECK(err_code);
+            
+            err_code = sha256_update(&ctx, readed_data, length);
+            APP_ERROR_CHECK(err_code);
+            
+            memset(readed_data, 0, sizeof(readed_data));
+            err_code = sha256_final(&ctx, readed_data, 0);
+            APP_ERROR_CHECK(err_code);
+            NRF_LOG_INFO("Hashed: \"%s\"", readed_data);
+            
+            length = 32;
             err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
             APP_ERROR_CHECK(err_code);
 }
