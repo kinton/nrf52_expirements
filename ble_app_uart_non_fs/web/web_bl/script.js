@@ -144,7 +144,7 @@ const disconnect = () => {
     }
     value = valueCleaned;
     console.log(value);
-    console.log(buf2hex(event.target.value.buffer).substring(0,24));
+    console.log(buf2hex(event.target.value.buffer));
   }
   function buf2hex(buffer) { // buffer is an ArrayBuffer
     return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');

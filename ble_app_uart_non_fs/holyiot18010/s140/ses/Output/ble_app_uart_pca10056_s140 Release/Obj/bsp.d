@@ -1,62 +1,65 @@
 Output/ble_app_uart_pca10056_s140\ Release/Obj/bsp.o: \
- C:\nRF5\components\libraries\bsp\bsp.c \
- C:\nRF5\components\libraries\bsp\bsp.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.30c/include/stdint.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.30c/include/stdbool.h \
- c:\nrf5\components\boards\boards.h c:\nrf5\modules\nrfx\hal\nrf_gpio.h \
- c:\nrf5\modules\nrfx\nrfx.h c:\nrf5\integration\nrfx\nrfx_config.h \
- ../config/sdk_config.h c:\nrf5\modules\nrfx\drivers\nrfx_common.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.30c/include/stddef.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.30c/include/__crossworks.h \
- c:\nrf5\modules\nrfx\mdk\nrf.h c:\nrf5\modules\nrfx\mdk\nrf52840.h \
- c:\nrf5\components\toolchain\cmsis\include\core_cm4.h \
- c:\nrf5\components\toolchain\cmsis\include\core_cmInstr.h \
- c:\nrf5\components\toolchain\cmsis\include\cmsis_gcc.h \
- c:\nrf5\components\toolchain\cmsis\include\core_cmFunc.h \
- c:\nrf5\components\toolchain\cmsis\include\core_cmSimd.h \
- c:\nrf5\modules\nrfx\mdk\system_nrf52840.h \
- c:\nrf5\modules\nrfx\mdk\system_nrf.h \
- c:\nrf5\modules\nrfx\mdk\nrf52840_bitfields.h \
- c:\nrf5\modules\nrfx\mdk\nrf51_to_nrf52840.h \
- c:\nrf5\modules\nrfx\mdk\nrf52_to_nrf52840.h \
- c:\nrf5\modules\nrfx\mdk\compiler_abstraction.h \
- c:\nrf5\modules\nrfx\mdk\nrf_peripherals.h \
- c:\nrf5\modules\nrfx\mdk\nrf52840_peripherals.h \
- c:\nrf5\integration\nrfx\nrfx_glue.h \
- c:\nrf5\integration\nrfx\legacy\apply_old_config.h \
- c:\nrf5\modules\nrfx\soc\nrfx_irqs.h \
- c:\nrf5\modules\nrfx\soc\nrfx_irqs_nrf52840.h \
- c:\nrf5\components\libraries\util\nrf_assert.h \
- c:\nrf5\components\libraries\util\app_util.h \
- c:\nrf5\modules\nrfx\mdk\compiler_abstraction.h \
- c:\nrf5\components\libraries\util\nordic_common.h \
- c:\nrf5\components\softdevice\s140\headers\nrf52\nrf_mbr.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_svc.h \
- c:\nrf5\components\libraries\util\nordic_common.h \
- c:\nrf5\components\libraries\util\app_util_platform.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_soc.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_svc.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_error.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_error_soc.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_nvic.h \
- c:\nrf5\components\libraries\util\nrf_assert.h \
- c:\nrf5\components\libraries\util\app_error.h \
- C:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.30c/include/stdio.h \
- c:\nrf5\components\libraries\util\sdk_errors.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_error.h \
- c:\nrf5\components\libraries\util\app_error_weak.h \
- c:\nrf5\modules\nrfx\soc\nrfx_coredep.h \
- c:\nrf5\modules\nrfx\soc\nrfx_atomic.h \
- c:\nrf5\components\libraries\util\sdk_errors.h \
- c:\nrf5\components\libraries\util\sdk_resources.h \
- c:\nrf5\components\softdevice\s140\headers\nrf_sd_def.h \
- c:\nrf5\modules\nrfx\drivers\nrfx_errors.h \
- c:\nrf5\components\boards\holyiot_18010.h \
- c:\nrf5\components\libraries\button\app_button.h \
- c:\nrf5\components\libraries\util\app_error.h \
- C:\nRF5\components\libraries\bsp\bsp_config.h \
- c:\nrf5\components\libraries\timer\app_timer.h \
- c:\nrf5\components\libraries\log\nrf_log_instance.h \
- c:\nrf5\components\libraries\experimental_section_vars\nrf_section.h \
- c:\nrf5\components\libraries\log\nrf_log_types.h \
- c:\nrf5\components\libraries\sortlist\nrf_sortlist.h
+ D:\work\nrf52\nRF5_SDK\components\libraries\bsp\bsp.c \
+ D:\work\nrf52\nRF5_SDK\components\libraries\bsp\bsp.h \
+ D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdint.h \
+ D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdbool.h \
+ ../../../../../../components/boards/boards.h \
+ ../../../../../../modules/nrfx/hal/nrf_gpio.h \
+ ../../../../../../modules/nrfx/nrfx.h \
+ ../../../../../../integration/nrfx/nrfx_config.h ../config/sdk_config.h \
+ ../../../../../../modules/nrfx/drivers/nrfx_common.h \
+ D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stddef.h \
+ D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/__crossworks.h \
+ ../../../../../../modules/nrfx/mdk/nrf.h \
+ ../../../../../../modules/nrfx/mdk/nrf52840.h \
+ ../../../../../../components/toolchain/cmsis/include/core_cm4.h \
+ ../../../../../../components/toolchain/cmsis/include/core_cmInstr.h \
+ ../../../../../../components/toolchain/cmsis/include/cmsis_gcc.h \
+ ../../../../../../components/toolchain/cmsis/include/core_cmFunc.h \
+ ../../../../../../components/toolchain/cmsis/include/core_cmSimd.h \
+ ../../../../../../modules/nrfx/mdk/system_nrf52840.h \
+ ../../../../../../modules/nrfx/mdk/system_nrf.h \
+ ../../../../../../modules/nrfx/mdk/nrf52840_bitfields.h \
+ ../../../../../../modules/nrfx/mdk/nrf51_to_nrf52840.h \
+ ../../../../../../modules/nrfx/mdk/nrf52_to_nrf52840.h \
+ ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
+ ../../../../../../modules/nrfx/mdk/nrf_peripherals.h \
+ ../../../../../../modules/nrfx/mdk/nrf52840_peripherals.h \
+ ../../../../../../integration/nrfx/nrfx_glue.h \
+ ../../../../../../integration/nrfx/legacy/apply_old_config.h \
+ ../../../../../../modules/nrfx/soc/nrfx_irqs.h \
+ ../../../../../../modules/nrfx/soc/nrfx_irqs_nrf52840.h \
+ ../../../../../../components/libraries/util/nrf_assert.h \
+ ../../../../../../components/libraries/util/app_util.h \
+ ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
+ ../../../../../../components/libraries/util/nordic_common.h \
+ ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
+ ../../../../../../components/libraries/util/nordic_common.h \
+ ../../../../../../components/libraries/util/app_util_platform.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_soc.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_error.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_error_soc.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_nvic.h \
+ ../../../../../../components/libraries/util/nrf_assert.h \
+ ../../../../../../components/libraries/util/app_error.h \
+ D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdio.h \
+ ../../../../../../components/libraries/util/sdk_errors.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_error.h \
+ ../../../../../../components/libraries/util/app_error_weak.h \
+ ../../../../../../modules/nrfx/soc/nrfx_coredep.h \
+ ../../../../../../modules/nrfx/soc/nrfx_atomic.h \
+ ../../../../../../components/libraries/util/sdk_errors.h \
+ ../../../../../../components/libraries/util/sdk_resources.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_sd_def.h \
+ ../../../../../../modules/nrfx/drivers/nrfx_errors.h \
+ ../../../../../../components/boards/holyiot18010.h \
+ ../../../../../../components/libraries/button/app_button.h \
+ ../../../../../../components/libraries/util/app_error.h \
+ D:\work\nrf52\nRF5_SDK\components\libraries\bsp\bsp_config.h \
+ ../../../../../../components/libraries/timer/app_timer.h \
+ ../../../../../../components/libraries/log/nrf_log_instance.h \
+ ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
+ ../../../../../../components/libraries/log/nrf_log_types.h \
+ ../../../../../../components/libraries/sortlist/nrf_sortlist.h

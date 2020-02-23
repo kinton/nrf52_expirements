@@ -1,17 +1,19 @@
-Output/ble_app_uart_pca10056_s140\ Release/Obj/nrf_atomic.o: \
- D:\work\nrf52\nRF5_SDK\components\libraries\atomic\nrf_atomic.c \
- D:\work\nrf52\nRF5_SDK\components\libraries\atomic\nrf_atomic.h \
- ../../../../../../components/libraries/util/sdk_common.h \
+Output/ble_app_uart_pca10056_s140\ Release/Obj/sha256.o: \
+ D:\work\nrf52\nRF5_SDK\components\libraries\sha256\sha256.c \
+ D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdlib.h \
+ D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/__crossworks.h \
+ D:\work\nrf52\nRF5_SDK\components\libraries\sha256\sha256.h \
  D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdint.h \
+ ../../../../../../components/libraries/util/sdk_errors.h \
+ ../../../../../../components/softdevice/s140/headers/nrf_error.h \
+ ../../../../../../components/libraries/util/sdk_common.h \
  D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdbool.h \
  D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/string.h \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/__crossworks.h \
  ../config/sdk_config.h \
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../components/libraries/util/sdk_os.h \
  ../../../../../../components/libraries/util/sdk_errors.h \
- ../../../../../../components/softdevice/s140/headers/nrf_error.h \
  ../../../../../../components/libraries/util/app_util.h \
  D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stddef.h \
  ../../../../../../modules/nrfx/mdk/nrf.h \
@@ -30,5 +32,4 @@ Output/ble_app_uart_pca10056_s140\ Release/Obj/nrf_atomic.o: \
  ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
- ../../../../../../components/libraries/util/nrf_assert.h \
- D:\work\nrf52\nRF5_SDK\components\libraries\atomic\nrf_atomic_internal.h
+ ../../../../../../components/libraries/util/nrf_assert.h
