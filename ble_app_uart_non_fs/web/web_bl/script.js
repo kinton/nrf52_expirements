@@ -144,6 +144,7 @@ const disconnect = () => {
     }
     value = valueCleaned;
     console.log(value);
+    console.log(buf2hex(event.target.value.buffer).substring(0,24));
   }
   function buf2hex(buffer) { // buffer is an ArrayBuffer
     return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
@@ -163,7 +164,7 @@ const disconnect = () => {
     console.log(value);
     console.log(valueHex);*/
     console.log(event.target.value.buffer);
-    console.log(buf2hex(event.target.value.buffer))
+    console.log(buf2hex(event.target.value.buffer));
   }
   let checkTokenIntegrity = event => {
     let value = new TextDecoder().decode(event.target.value);
