@@ -300,13 +300,33 @@ static void read_and_send(uint32_t from) {
 
             err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
             APP_ERROR_CHECK(err_code);
-
+            
 
             // lets try sha256
+            uint8_t dict[36] = "0123456789abcdefghigklmnopqrstuvwxyz";
+            uint8_t e1[] = "f9c7af7ebcbf098b9f5f37361d1b168bb2e5b98d930ceef0f055377a8c94db61fcfdvsgvgawvgdvg";
+            uint8_t e2[] = "e09a1c85140c4a95c80c5b405056ce9e81041688ebdcf9723eaa0cebe7c91c71sdbfhdsbfhbdhfb2";
+            length = sizeof(e1) - 1;
+            uint8_t r[length];
+
             sha256_context_t ctx;
             err_code = sha256_init(&ctx);
             APP_ERROR_CHECK(err_code);
+
+            for (int i = 0; i < length; i++) {
+              r[i] = dict[(e1[i] ^ e2[i])%36];
+            }
+            NRF_LOG_INFO("R: \"%s\"", r);
+            err_code = sha256_update(&ctx, r, length);
+            APP_ERROR_CHECK(err_code);
+            memset(r, 0, sizeof(r));
+            err_code = sha256_final(&ctx, r, 0);
+            NRF_LOG_INFO("Hashed: \"%s\"", r);
+            APP_ERROR_CHECK(err_code);
+            length = 32;
+            err_code = ble_nus_data_send(&m_nus, r, &length, m_conn_handle);
             
+            if (false) {
             err_code = sha256_update(&ctx, readed_data, length);
             APP_ERROR_CHECK(err_code);
             
@@ -318,6 +338,7 @@ static void read_and_send(uint32_t from) {
             length = 32;
             err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
             APP_ERROR_CHECK(err_code);
+            }
 }
 static void write_from_handler(void) {
             ret_code_t err_code;
