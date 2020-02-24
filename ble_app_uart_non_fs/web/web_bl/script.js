@@ -35,6 +35,9 @@ const answerTypes = {
     },
     2: {
       name: "Token writed"
+    },
+    3: {
+      name: "Token checked"
     }
 }
 
