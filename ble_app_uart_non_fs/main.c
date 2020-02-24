@@ -299,8 +299,8 @@ static void read_and_send(uint32_t from) {
             // length = sizeof(readed_data);
 
             // hash of the key is now send instead of key
-            /*err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
-            APP_ERROR_CHECK(err_code);*/
+            // err_code = ble_nus_data_send(&m_nus, readed_data, &length, m_conn_handle);
+            // APP_ERROR_CHECK(err_code);
             sha256_context_t ctx;
             err_code = sha256_init(&ctx);
             APP_ERROR_CHECK(err_code);
@@ -314,6 +314,7 @@ static void read_and_send(uint32_t from) {
             APP_ERROR_CHECK(err_code);
 
             // lets try sha256
+            // byte sum demo
             /*uint8_t dict[36] = "0123456789abcdefghigklmnopqrstuvwxyz";
             uint8_t e1[] = "f9c7af7ebcbf098b9f5f37361d1b168bb2e5b98d930ceef0f055377a8c94db61fcfdvsgvgawvgdvg";
             uint8_t e2[] = "e09a1c85140c4a95c80c5b405056ce9e81041688ebdcf9723eaa0cebe7c91c71sdbfhdsbfhbdhfb2";
@@ -337,6 +338,7 @@ static void read_and_send(uint32_t from) {
             length = 32;
             err_code = ble_nus_data_send(&m_nus, r, &length, m_conn_handle);
             
+            // just hashing
             if (false) {
             err_code = sha256_update(&ctx, readed_data, length);
             APP_ERROR_CHECK(err_code);
@@ -515,13 +517,37 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         current_work_mode = token_write_and_check;
 
         uint32_t err_code;
+        
+        bool is_token = get_token_write_status();
+        if (is_token) {
+          // bit amount setup
+          if (mh_len == 0)
+              mh_len = maxlenoverble;
+          uint8_t    readed_data[mh_len];
+          uint16_t length = sizeof(readed_data);
+          err_code = nrf_fstorage_read(&fstorage, tokenstart, readed_data, length);
+          APP_ERROR_CHECK(err_code);
+          uint8_t dict[36] = "0123456789abcdefghigklmnopqrstuvwxyz";
 
-        // write ble data to m_h, saving his len to mh_len
-        memset(message_handler, 0, sizeof message_handler);
-        for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
-        {
-            message_handler[mh_len] = p_evt->params.rx_data.p_data[mh_len];
-            if (mh_len == maxlenoverble) break;
+          // write ble data to m_h, saving his len to mh_len
+          memset(message_handler, 0, sizeof message_handler);
+          for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
+          {   
+              // byte sum performing
+              message_handler[mh_len] = dict[(p_evt->params.rx_data.p_data[mh_len] ^ readed_data[mh_len]) % 36];
+              // message_handler[mh_len] = p_evt->params.rx_data.p_data[mh_len];
+              if (mh_len == maxlenoverble) break;
+          }
+          // NRF_LOG_INFO("Old: %s\n", readed_data);
+          // NRF_LOG_INFO("New': %s\n", p_evt->params.rx_data.p_data);
+          // NRF_LOG_INFO("New: %s\n", message_handler);
+        } else {
+          memset(message_handler, 0, sizeof message_handler);
+          for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
+          {   
+              message_handler[mh_len] = p_evt->params.rx_data.p_data[mh_len];
+              if (mh_len == maxlenoverble) break;
+          }
         }
 
         // clean token page, start echo in fstorage handler
