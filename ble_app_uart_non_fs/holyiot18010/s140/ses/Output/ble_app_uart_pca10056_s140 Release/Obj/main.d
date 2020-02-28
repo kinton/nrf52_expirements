@@ -1,8 +1,8 @@
 Output/ble_app_uart_pca10056_s140\ Release/Obj/main.o: \
  D:\work\nrf52\nRF5_SDK\examples\nrf52_expirements\ble_app_uart_non_fs\main.c \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdint.h \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/string.h \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/__crossworks.h \
+ D:/Program\ files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdint.h \
+ D:/Program\ files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/string.h \
+ D:/Program\ files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/__crossworks.h \
  ../../../../../../components/libraries/util/nordic_common.h \
  ../../../../../../modules/nrfx/mdk/nrf.h \
  ../../../../../../modules/nrfx/mdk/nrf52840.h \
@@ -19,7 +19,7 @@ Output/ble_app_uart_pca10056_s140\ Release/Obj/main.o: \
  ../../../../../../modules/nrfx/mdk/compiler_abstraction.h \
  ../../../../../../components/softdevice/s140/headers/ble_hci.h \
  ../../../../../../components/ble/common/ble_advdata.h \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdbool.h \
+ D:/Program\ files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdbool.h \
  ../../../../../../components/softdevice/s140/headers/ble.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
  ../../../../../../components/softdevice/s140/headers/nrf_error.h \
@@ -40,7 +40,7 @@ Output/ble_app_uart_pca10056_s140\ Release/Obj/main.o: \
  ../../../../../../components/libraries/util/sdk_errors.h \
  ../../../../../../components/softdevice/s140/headers/nrf_error.h \
  ../../../../../../components/libraries/util/app_util.h \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stddef.h \
+ D:/Program\ files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stddef.h \
  ../../../../../../components/softdevice/s140/headers/nrf52/nrf_mbr.h \
  ../../../../../../components/softdevice/s140/headers/nrf_svc.h \
  ../../../../../../components/libraries/util/sdk_macros.h \
@@ -67,7 +67,7 @@ Output/ble_app_uart_pca10056_s140\ Release/Obj/main.o: \
  ../../../../../../components/ble/common/ble_srv_common.h \
  ../../../../../../components/libraries/timer/app_timer.h \
  ../../../../../../components/libraries/util/app_error.h \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdio.h \
+ D:/Program\ files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdio.h \
  ../../../../../../components/libraries/util/app_error_weak.h \
  ../../../../../../components/libraries/log/nrf_log_instance.h \
  ../../../../../../components/libraries/experimental_section_vars/nrf_section.h \
@@ -117,6 +117,6 @@ Output/ble_app_uart_pca10056_s140\ Release/Obj/main.o: \
  ../../../../../../components/libraries/log/src/nrf_log_ctrl_internal.h \
  ../../../../../../components/libraries/log/nrf_log_backend_interface.h \
  ../../../../../../components/libraries/memobj/nrf_memobj.h \
- D:/Program\ Files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdlib.h \
+ D:/Program\ files/SEGGER/SEGGER\ Embedded\ Studio\ for\ ARM\ 4.50/include/stdlib.h \
  ../../../../../../components/libraries/balloc/nrf_balloc.h \
  ../../../../../../components/libraries/log/nrf_log_default_backends.h
