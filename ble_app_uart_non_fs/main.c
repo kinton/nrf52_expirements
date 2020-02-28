@@ -154,6 +154,7 @@ typedef enum {
     is_token_writed,
     ask_for_token,
     ask_for_device_id,
+    erase_token
 } ble_command;
 #define ble_command_len 2;
 
@@ -512,6 +513,12 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
         {
             send_device_id();
         }
+        else if (cmd == erase_token)
+        {
+            err_code = nrf_fstorage_erase(&fstorage, tokenstart, 1, NULL);
+            APP_ERROR_CHECK(err_code);
+            // continue in fstorage handler
+        }
         
     } else if (p_evt->type == BLE_NUS_EVT_RX_TOKEN_DATA) {
         current_work_mode = token_write_and_check;
@@ -527,7 +534,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
           uint16_t length = sizeof(readed_data);
           err_code = nrf_fstorage_read(&fstorage, tokenstart, readed_data, length);
           APP_ERROR_CHECK(err_code);
-          uint8_t dict[36] = "0123456789abcdefghigklmnopqrstuvwxyz";
+          uint8_t dict[36] = "0123456789abcdefghijklmnopqrstuvwxyz";
 
           // write ble data to m_h, saving his len to mh_len
           memset(message_handler, 0, sizeof message_handler);
@@ -540,7 +547,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
           }
           // NRF_LOG_INFO("Old: %s\n", readed_data);
           // NRF_LOG_INFO("New': %s\n", p_evt->params.rx_data.p_data);
-          // NRF_LOG_INFO("New: %s\n", message_handler);
+          NRF_LOG_INFO("New: %s\n", message_handler);
         } else {
           memset(message_handler, 0, sizeof message_handler);
           for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
@@ -1040,6 +1047,14 @@ static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
             
             if (mh_len > 0 && current_work_mode == token_write_and_check)
               write_from_handler();
+
+            if (current_work_mode == command_processing)
+            {
+              bool is_token = get_token_write_status();
+              ble_command_answer ca = is_token ? bad : ok;
+              NRF_LOG_INFO("Erasing token: %d\n", ca);
+              send_command_answer(ca);
+            }
 
         } break;
 
