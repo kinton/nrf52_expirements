@@ -387,6 +387,25 @@ static bool get_token_write_status(void) {
 
             return is_token;
 }
+static bool is_token_writed_correctly(void) {
+            ret_code_t err_code;
+            uint8_t readed_data[tokenlen] = {0};
+
+            err_code = nrf_fstorage_read(&fstorage, tokenstart, readed_data, tokenlen);
+            APP_ERROR_CHECK(err_code);
+            
+            bool is_token = true;
+            for (int i = 0; i < tokenlen; i++) {
+                if (readed_data[i] != message_handler[i]) {
+                    is_token = false;
+                    break;
+                }
+            }
+            memset(message_handler, 0, sizeof message_handler);
+            memset(readed_data, 0, sizeof readed_data);
+
+            return is_token;
+}
 static void send_command_answer(ble_command_answer ca) {
             ret_code_t err_code;
             uint16_t length = 1;
@@ -548,6 +567,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
           // NRF_LOG_INFO("Old: %s\n", readed_data);
           // NRF_LOG_INFO("New': %s\n", p_evt->params.rx_data.p_data);
           NRF_LOG_INFO("New: %s\n", message_handler);
+          memset(readed_data, 0, sizeof readed_data);
         } else {
           memset(message_handler, 0, sizeof message_handler);
           for (mh_len = 0; mh_len < p_evt->params.rx_data.length; mh_len++)
@@ -1036,7 +1056,12 @@ static void fstorage_evt_handler(nrf_fstorage_evt_t * p_evt)
             NRF_LOG_INFO("--> Event received: wrote %d bytes at address 0x%x.",
                          p_evt->len, p_evt->addr);
             if (mh_len > 0 && current_work_mode == token_write_and_check)
-              read_and_send(tokenstart);
+              //read_and_send(tokenstart);
+            {
+              bool is_token = is_token_writed_correctly();
+              ble_command_answer ca = is_token ? ok : bad;
+              send_command_answer(ca);
+            }
               
         } break;
 
